@@ -1,8 +1,10 @@
-//  新增、刪除視窗 Model
-let productModel = null;
+import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.11/vue.esm-browser.js';
+
+//  新增、刪除視窗 Modal
+let productModal = null;
 let delProductModal = null;
 
-const app = {
+const app = createApp({
     data() {
         return {
             apiPath: api_path,
@@ -129,6 +131,6 @@ const app = {
         // get products
         this.getProducts();
     },
-}
+})
 
-Vue.createApp(app).mount('#app');
+app.mount('#app');

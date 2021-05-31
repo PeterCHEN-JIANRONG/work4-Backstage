@@ -212,8 +212,7 @@
 
         <!-- Modal -->
     </div>
-    <!-- Vue3、axios、BS5 -->
-    <script src="https://unpkg.com/vue@next"></script>
+    <!-- axios、BS5 -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
         integrity='sha512-Xk3wWei2TGrsh9kDSBKUMIjw/86sLUvhtnv9f7fOuIwhhiUTKz8szkWkzHthrM5Bb3Bu9idSzkxOrkzhcneuiw=='
         crossorigin='anonymous'></script>
@@ -225,7 +224,8 @@
         crossorigin="anonymous"></script>
     <!-- my js -->
     <script src="./js/config.js"></script>
-    <script src="./js/all.js"></script>
+    <!-- 使用esm module，script type必須為module -->
+    <script src="./js/all.js" type="module"></script>
 </body>
 
 </html>
