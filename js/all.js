@@ -13,7 +13,8 @@ const app = createApp({
             isAdd: false,
             tempProduct: {
                 imagesUrl: []
-            }
+            },
+            pagination: {}
         }
     },
     methods: {
@@ -31,8 +32,10 @@ const app = createApp({
             const url = `${this.apiBaseUrl}/api/${this.apiPath}/admin/products?page=${page}`;
             axios.get(url)
                 .then(res => {
+                    console.log(res.data);
                     if (res.data.success) {
                         this.products = res.data.products;
+                        this.pagination = res.data.pagination;
                     } else {
                         alert(res.data.message);
                         window.location = "login.html";
@@ -131,6 +134,32 @@ const app = createApp({
         // get products
         this.getProducts();
     },
+})
+
+app.component('pagination', {
+    props: ['page'],
+    template: `<nav aria-label="Page navigation example">
+        <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item" 
+        :class="{ 'active': page.current_page === item }"
+        v-for="item in page.total_pages" :key="item">        
+            <a class="page-link" href="#" @click="$emit('get-products',item)">{{item}}</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        </ul>
+    </nav>`,
+    created() {
+        console.log("page", this.page);
+    }
 })
 
 app.mount('#app');

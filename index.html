@@ -71,6 +71,9 @@
             </table>
             <p>目前有 <span id="productCount">{{products.length}}</span> 項產品</p>
         </div>
+        <div class="d-flex justify-content-center mt-2">
+            <pagination :page="pagination" @get-products="getProducts"></pagination>
+        </div>
         <!-- Modal -->
         <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
             aria-hidden="true">
