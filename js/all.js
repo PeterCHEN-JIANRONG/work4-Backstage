@@ -32,7 +32,6 @@ const app = createApp({
             const url = `${this.apiBaseUrl}/api/${this.apiPath}/admin/products?page=${page}`;
             axios.get(url)
                 .then(res => {
-                    console.log(res.data);
                     if (res.data.success) {
                         this.products = res.data.products;
                         this.pagination = res.data.pagination;
@@ -140,8 +139,9 @@ app.component('pagination', {
     props: ['page'],
     template: `<nav aria-label="Page navigation example">
         <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
+        <li class="page-item" :class="{ 'disabled': !page.has_pre }">
+            <a class="page-link" href="#" aria-label="Previous"
+            @click="$emit('get-products',page.current_page - 1)">
             <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
@@ -150,8 +150,9 @@ app.component('pagination', {
         v-for="item in page.total_pages" :key="item">        
             <a class="page-link" href="#" @click="$emit('get-products',item)">{{item}}</a>
         </li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
+        <li class="page-item" :class="{ 'disabled': !page.has_next }">
+            <a class="page-link" href="#" aria-label="Next"
+            @click="$emit('get-products',page.current_page + 1)">
             <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
