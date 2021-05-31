@@ -71,15 +71,16 @@
             </table>
             <p>目前有 <span id="productCount">{{products.length}}</span> 項產品</p>
         </div>
+        
+        <!-- 元件 -->
         <div class="d-flex justify-content-center mt-2">
             <pagination :page="pagination" @get-products="getProducts"></pagination>
         </div>
 
-        <!-- 元件 -->
+        <!-- Modal 元件 -->
         <product-modal :temp-product="tempProduct" :is-add="isAdd" @update-product="updateProduct"></product-modal>
         <del-product-modal :temp-product="tempProduct" @delete-product="deleteProduct"></del-product-modal>
-        
-        <!-- Modal -->
+
     </div>
     <!-- axios、BS5 -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'

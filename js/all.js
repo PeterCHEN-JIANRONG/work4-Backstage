@@ -120,14 +120,6 @@ const app = createApp({
         },
     },
     mounted() {
-        // !! Modal必須在mounted建立，建立在created會有畫面渲染不到資料的問題
-        productModal = new bootstrap.Modal(document.querySelector('#productModal'), {
-            keyboard: false
-        });
-        delProductModal = new bootstrap.Modal(document.querySelector('#delProductModal'), {
-            keyboard: false
-        })
-
         // setting axios header token
         this.getLoginToken();
         // get products
@@ -256,6 +248,13 @@ app.component('productModal', {
             this.tempProduct.imagesUrl = [];
             this.tempProduct.imagesUrl.push('');
         },
+    },
+    mounted() {
+        // !! Modal必須在mounted建立，建立在created會有畫面渲染不到資料的問題
+        productModal = new bootstrap.Modal(document.querySelector('#productModal'), {
+            keyboard: false,
+            backdrop: 'static'
+        });
     }
 })
 
@@ -285,7 +284,14 @@ app.component('delProductModal', {
             </div>
         </div>
     </div>
-</div>`
+</div>`,
+    mounted() {
+        // !! Modal必須在mounted建立，建立在created會有畫面渲染不到資料的問題
+        delProductModal = new bootstrap.Modal(document.querySelector('#delProductModal'), {
+            keyboard: false,
+            backdrop: 'static'
+        })
+    }
 })
 
 app.mount('#app');
