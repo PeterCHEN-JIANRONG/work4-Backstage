@@ -1,5 +1,5 @@
 # work4-Backstage
-商品網站後台，元件化(Components)
+商品網站後台，新增、刪除Modal元件化(Components)、加入pagination(元件)
 
 # 頁面
 - [登入頁](https://peterchen-jianrong.github.io/work4-Backstage/index.html)
