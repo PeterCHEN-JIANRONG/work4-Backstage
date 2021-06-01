@@ -13,6 +13,7 @@ const app = createApp({
             apiBaseUrl: api_base_url,
             products: [],
             isAdd: false,
+            updating: false,
             tempProduct: {
                 imagesUrl: []
             },
@@ -40,6 +41,8 @@ const app = createApp({
                     if (res.data.success) {
                         this.products = res.data.products;
                         this.pagination = res.data.pagination;
+                        // 更新完成
+                        this.updating = false;
                     } else {
                         alert(res.data.message);
                         window.location = "index.html";
@@ -81,6 +84,28 @@ const app = createApp({
                     if (res.data.success) {
                         alert(res.data.message)
                         productModal.hide();
+                        this.getProducts();
+                    } else {
+                        alert(res.data.message);
+                    }
+                })
+                .catch(err => {
+                    console.dir(err);
+                })
+        },
+        updateProductStatus(product) {
+            // 更新旗標
+            this.updating = true;
+            let tempProduct = { ...product };
+            // 修改 method
+            const url = `${this.apiBaseUrl}/api/${this.apiPath}/admin/product/${tempProduct.id}`
+            // 狀態反向
+            tempProduct.is_enabled = tempProduct.is_enabled ? 0 : 1;
+
+            axios.put(url, { data: tempProduct })
+                .then(res => {
+                    if (res.data.success) {
+                        alert(res.data.message)
                         this.getProducts();
                     } else {
                         alert(res.data.message);

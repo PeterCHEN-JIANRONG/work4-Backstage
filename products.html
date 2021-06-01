@@ -31,7 +31,7 @@
                         <th width="80">
                             售價
                         </th>
-                        <th width="80">
+                        <th width="120">
                             是否啟用
                         </th>
                         <th width="120">
@@ -52,15 +52,25 @@
                             <td class="text-end">{{toThousand(item.origin_price)}}</td>
                             <td class="text-end">{{toThousand(item.price)}}</td>
                             <td>
-                                <span class="text-success" v-if="item.is_enabled">啟用</span>
-                                <span v-else>未啟用</span>
+                                <!-- <span class="text-success" v-if="item.is_enabled">啟用</span>
+                                <span v-else>未啟用</span> -->
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" 
+                                        :id="item.id" 
+                                        :checked="item.is_enabled? true : false"
+                                        :disabled="updating"
+                                        @change="updateProductStatus(item)">
+                                    <label class="form-check-label" :for="item.id">{{item.is_enabled?'啟用':'未啟用'}}</label>
+                                </div>
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-outline-primary btn-sm"  @click="openModal('edit', item)">
+                                    <button type="button" class="btn btn-outline-primary btn-sm"
+                                        @click="openModal('edit', item)">
                                         編輯
                                     </button>
-                                    <button type="button" class="btn btn-outline-danger btn-sm" @click="openModal('delete', item)">
+                                    <button type="button" class="btn btn-outline-danger btn-sm"
+                                        @click="openModal('delete', item)">
                                         刪除
                                     </button>
                                 </div>
@@ -71,7 +81,7 @@
             </table>
             <p>目前有 <span id="productCount">{{products.length}}</span> 項產品</p>
         </div>
-        
+
         <!-- 元件 -->
         <div class="d-flex justify-content-center mt-2">
             <pagination :page="pagination" @get-products="getProducts"></pagination>
