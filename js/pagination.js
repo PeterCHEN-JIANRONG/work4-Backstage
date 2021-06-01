@@ -1,5 +1,13 @@
 export default {
-    props: ['page'],
+    // props: ['page'],
+    props: {
+        page: {
+            type: Object,
+            default() {
+                return {}
+            },
+        }
+    },
     template: `<nav aria-label="Page navigation example">
         <ul class="pagination">
         <li class="page-item" :class="{ 'disabled': !page.has_pre }">
