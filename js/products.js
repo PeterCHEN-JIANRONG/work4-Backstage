@@ -15,9 +15,13 @@ const app = createApp({
             isAdd: false,
             updating: false,
             tempProduct: {
-                imagesUrl: []
+                imagesUrl: [],
+                options: {
+                    sell_status: "",
+                }
             },
-            pagination: {}
+            pagination: {},
+            sellStatusOptions: ['店長推薦', '本週暢銷商品', '本週銷售冠軍', '本月暢銷商品', '本月銷售冠軍'],
         }
     },
     components: {
@@ -121,7 +125,10 @@ const app = createApp({
                 case 'add':
                     this.isAdd = true; //新增add
                     this.tempProduct = {
-                        imagesUrl: []
+                        imagesUrl: [],
+                        options: {
+                            sell_status: "",
+                        }
                     }
                     productModal.show();
                     break;
@@ -160,12 +167,19 @@ app.component('productModal', {
             default() {
                 return {
                     imagesUrl: [],
+                    options: {
+                        sell_status: "",
+                    }
                 }
             }
         },
         isAdd: {
             type: Boolean,
             default: false,
+        },
+        sellStatusOptions: {
+            type: Object,
+            default: [],
         }
     },
     methods: {

@@ -89,7 +89,7 @@
         </div>
 
         <!-- Modal 元件 -->
-        <product-modal :temp-product="tempProduct" :is-add="isAdd" @update-product="updateProduct"></product-modal>
+        <product-modal :temp-product="tempProduct" :is-add="isAdd" :sell-status-options="sellStatusOptions" @update-product="updateProduct"></product-modal>
         <del-product-modal :temp-product="tempProduct" @delete-product="deleteProduct"></del-product-modal>
 
     </div>
@@ -147,12 +147,12 @@
                             </div>
                         </div>
                         <div class="col-sm-8">
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="title">標題</label>
                                 <input id="title" type="text" class="form-control" placeholder="請輸入標題" v-model="tempProduct.title">
                             </div>
 
-                            <div class="row">
+                            <div class="row mb-2">
                                 <div class="form-group col-md-6">
                                     <label for="category">分類</label>
                                     <input id="category" type="text" class="form-control" placeholder="請輸入分類" v-model="tempProduct.category">
@@ -163,7 +163,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mb-2">
                                 <div class="form-group col-md-6">
                                     <label for="origin_price">原價</label>
                                     <input id="origin_price" type="number" min="0" class="form-control"
@@ -175,14 +175,29 @@
                                         placeholder="請輸入售價" v-model.number="tempProduct.price">
                                 </div>
                             </div>
+                            <div class="row mb-2">
+                                <div class="form-group col-md-6">
+                                    <label for="sell_status">銷售狀態</label>
+                                    <select id="sell_status" class="form-select" aria-label="Default select option"
+                                    v-model="tempProduct.options.sell_status">
+                                        <option value="" selected>無</option>
+                                        <option :value="item" v-for="item in sellStatusOptions" :key="item">{{item}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="score">評價</label>
+                                    <input id="score" type="number" min="0" class="form-control"
+                                        placeholder="請輸入評價" v-model.number="tempProduct.options.score">
+                                </div>
+                            </div>
                             <hr>
 
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="description">產品描述</label>
                                 <textarea id="description" type="text" class="form-control" placeholder="請輸入產品描述" v-model="tempProduct.description">
                 </textarea>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="content">說明內容</label>
                                 <textarea id="content" type="text" class="form-control" placeholder="請輸入說明內容" v-model="tempProduct.content">
                 </textarea>
