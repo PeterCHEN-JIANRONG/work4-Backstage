@@ -154,7 +154,20 @@ const app = createApp({
 
 app.component('productModal', {
     template: '#productModal-template',
-    props: ['tempProduct', 'isAdd'],
+    props: {
+        tempProduct: {
+            type: Object,
+            default() {
+                return {
+                    imagesUrl: [],
+                }
+            }
+        },
+        isAdd: {
+            type: Boolean,
+            default: false,
+        }
+    },
     methods: {
         createImages() {
             // 將imagesUrl 賦予空陣列，並塞空字串，好讓v-for渲染 url-input、和顯示刪除Btn
@@ -173,7 +186,13 @@ app.component('productModal', {
 
 app.component('delProductModal', {
     template: '#delProductModal-template',
-    props: ['tempProduct'],
+    // props: ['tempProduct'],
+    props: {
+        tempProduct: {
+            type: Object,
+            default: {}
+        },
+    },
     mounted() {
         // !! Modal必須在mounted建立，建立在created會有畫面渲染不到資料的問題
         delProductModal = new bootstrap.Modal(document.querySelector('#delProductModal'), {
