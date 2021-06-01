@@ -60,7 +60,10 @@
                                         :checked="item.is_enabled? true : false"
                                         :disabled="updating"
                                         @change="updateProductStatus(item)">
-                                    <label class="form-check-label" :for="item.id">{{item.is_enabled?'啟用':'未啟用'}}</label>
+                                    <label class="form-check-label" :for="item.id">
+                                        <span v-if="item.is_enabled" class="text-success">啟用</span>
+                                        <span v-else>未啟用</span>
+                                    </label>
                                 </div>
                             </td>
                             <td>
