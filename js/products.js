@@ -28,7 +28,7 @@ const app = createApp({
             const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
             if (!token) {
                 alert("尚未登入");
-                window.location = "login.html";
+                window.location = "index.html";
                 return
             }
             axios.defaults.headers.common['Authorization'] = token;
@@ -42,7 +42,7 @@ const app = createApp({
                         this.pagination = res.data.pagination;
                     } else {
                         alert(res.data.message);
-                        window.location = "login.html";
+                        window.location = "index.html";
                         return
                     }
                 })

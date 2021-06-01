@@ -21,7 +21,7 @@ const app = {
                         const { token, expired } = res.data;
                         // set cookie, expired設置有效時間
                         document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
-                        window.location = "index.html";
+                        window.location = "products.html";
                     } else {
                         alert(`${res.data.message}，請確認帳號、密碼是否輸入正確`);
                         this.user.username = "";
