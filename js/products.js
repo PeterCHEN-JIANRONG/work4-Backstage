@@ -2,10 +2,6 @@
 import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.11/vue.esm-browser.js';
 import pagination from './pagination.js'
 
-//  新增、刪除視窗 Modal
-let productModal = null;
-let delProductModal = null;
-
 const app = createApp({
     data() {
         return {
@@ -65,7 +61,7 @@ const app = createApp({
                         // const product = this.products.find(item => item.id === productId);
                         alert(res.data.message);
                         this.getProducts();
-                        delProductModal.hide();
+                        this.$refs.delProductModalA.hideModal();
                     } else {
                         alert(res.data.message);
                     }
@@ -87,7 +83,7 @@ const app = createApp({
                 .then(res => {
                     if (res.data.success) {
                         alert(res.data.message)
-                        productModal.hide();
+                        this.$refs.productModalA.hideModal();
                         this.getProducts();
                     } else {
                         alert(res.data.message);
@@ -130,16 +126,16 @@ const app = createApp({
                             sell_status: "",
                         }
                     }
-                    productModal.show();
+                    this.$refs.productModalA.showModal();
                     break;
                 case 'edit':
                     this.isAdd = false; //修改edit
                     this.tempProduct = JSON.parse(JSON.stringify(item)); //因為tempProduct.imagesUrl可能會有傳參考問題, 改用深拷貝
-                    productModal.show();
+                    this.$refs.productModalA.showModal();
                     break;
                 case 'delete':
                     this.tempProduct = { ...item };
-                    delProductModal.show();
+                    this.$refs.delProductModalA.showModal();
                     break;
             }
 
@@ -161,6 +157,11 @@ const app = createApp({
 
 app.component('productModal', {
     template: '#productModal-template',
+    data() {
+        return {
+            modal: null,
+        }
+    },
     props: {
         tempProduct: {
             type: Object,
@@ -183,6 +184,12 @@ app.component('productModal', {
         }
     },
     methods: {
+        showModal() {
+            this.modal.show();
+        },
+        hideModal() {
+            this.modal.hide();
+        },
         createImages() {
             // 將imagesUrl 賦予空陣列，並塞空字串，好讓v-for渲染 url-input、和顯示刪除Btn
             this.tempProduct.imagesUrl = [];
@@ -191,7 +198,7 @@ app.component('productModal', {
     },
     mounted() {
         // !! Modal必須在mounted建立，建立在created會有畫面渲染不到資料的問題
-        productModal = new bootstrap.Modal(document.querySelector('#productModal'), {
+        this.modal = new bootstrap.Modal(this.$refs.productModal, {
             keyboard: false,
             backdrop: 'static'
         });
@@ -200,6 +207,11 @@ app.component('productModal', {
 
 app.component('delProductModal', {
     template: '#delProductModal-template',
+    data() {
+        return {
+            modal: null,
+        }
+    },
     // props: ['tempProduct'],
     props: {
         tempProduct: {
@@ -207,9 +219,17 @@ app.component('delProductModal', {
             default: {}
         },
     },
+    methods: {
+        showModal() {
+            this.modal.show();
+        },
+        hideModal() {
+            this.modal.hide();
+        },
+    },
     mounted() {
         // !! Modal必須在mounted建立，建立在created會有畫面渲染不到資料的問題
-        delProductModal = new bootstrap.Modal(document.querySelector('#delProductModal'), {
+        this.modal = new bootstrap.Modal(this.$refs.delProductModal, {
             keyboard: false,
             backdrop: 'static'
         })

@@ -89,8 +89,8 @@
         </div>
 
         <!-- Modal 元件 -->
-        <product-modal :temp-product="tempProduct" :is-add="isAdd" :sell-status-options="sellStatusOptions" @update-product="updateProduct"></product-modal>
-        <del-product-modal :temp-product="tempProduct" @delete-product="deleteProduct"></del-product-modal>
+        <product-modal ref="productModalA" :temp-product="tempProduct" :is-add="isAdd" :sell-status-options="sellStatusOptions" @update-product="updateProduct"></product-modal>
+        <del-product-modal ref="delProductModalA" :temp-product="tempProduct" @delete-product="deleteProduct"></del-product-modal>
 
     </div>
 
