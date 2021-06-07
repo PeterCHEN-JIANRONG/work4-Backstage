@@ -198,7 +198,7 @@ app.component('productModal', {
     },
     mounted() {
         // !! Modal必須在mounted建立，建立在created會有畫面渲染不到資料的問題
-        this.modal = new bootstrap.Modal(this.$refs.productModal, {
+        this.modal = new bootstrap.Modal(this.$refs.modal, {
             keyboard: false,
             backdrop: 'static'
         });
@@ -229,7 +229,7 @@ app.component('delProductModal', {
     },
     mounted() {
         // !! Modal必須在mounted建立，建立在created會有畫面渲染不到資料的問題
-        this.modal = new bootstrap.Modal(this.$refs.delProductModal, {
+        this.modal = new bootstrap.Modal(this.$refs.modal, {
             keyboard: false,
             backdrop: 'static'
         })
